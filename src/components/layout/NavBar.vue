@@ -253,6 +253,7 @@ function editBotLogin(botId: string) {
             }"
           />
           <ThemeSelect />
+          <LanguageSelect />
         </div>
 
         <!-- Right aligned nav items -->
@@ -328,8 +329,9 @@ function editBotLogin(botId: string) {
                 <USeparator class="my-2" />
                 <span>Version: {{ settingsStore.uiVersion }}</span>
 
-                <div class="flex flex-row items-center justify-center">
+                <div class="flex flex-row items-center justify-center gap-2">
                   <ThemeSelect show-text />
+                  <LanguageSelect show-text />
                 </div>
                 <USeparator class="my-2" />
                 <div class="flex flex-row items-center">
