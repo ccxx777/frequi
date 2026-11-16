@@ -135,7 +135,7 @@ onMounted(() => {
                 color="neutral"
                 variant="ghost"
                 size="xs"
-                title="Clear start date"
+                :title="$t('Clear start date')"
                 @click="dateFrom = null"
               />
               <UPopover v-model:open="popoverFromOpen">
@@ -151,12 +151,12 @@ onMounted(() => {
             </template>
           </UInputDate>
         </UFormField>
-        <UFormField v-if="useTime" label="Time">
+        <UFormField v-if="useTime" :label="$t('Time')">
           <UInputTime
             v-model="timeFrom"
             :hour-cycle="24"
             :granularity="granularity"
-            title="Start time (UTC)"
+            :title="$t('Start time (UTC)')"
           >
             <template #trailing>
               <UButton
@@ -165,7 +165,7 @@ onMounted(() => {
                 color="neutral"
                 variant="ghost"
                 size="xs"
-                title="Clear start time"
+                :title="$t('Clear start time')"
                 @click="timeFrom = null"
               />
             </template>
@@ -188,7 +188,7 @@ onMounted(() => {
                 color="neutral"
                 variant="ghost"
                 size="xs"
-                title="Clear end date"
+                :title="$t('Clear end date')"
                 @click="dateTo = null"
               />
               <UPopover v-model:open="popoverToOpen">
@@ -204,12 +204,12 @@ onMounted(() => {
             </template>
           </UInputDate>
         </UFormField>
-        <UFormField v-if="useTime" label="Time">
+        <UFormField v-if="useTime" :label="$t('Time')">
           <UInputTime
             v-model="timeTo"
             :hour-cycle="24"
             :granularity="granularity"
-            title="End time (UTC)"
+            :title="$t('End time (UTC)')"
           >
             <template #trailing>
               <UButton
@@ -218,7 +218,7 @@ onMounted(() => {
                 color="neutral"
                 variant="ghost"
                 size="xs"
-                title="Clear end time"
+                :title="$t('Clear end time')"
                 @click="timeTo = null"
               /> </template
           ></UInputTime>
@@ -230,7 +230,7 @@ onMounted(() => {
       <BaseCheckbox
         v-if="canUseTime"
         v-model="withTime"
-        title="Select the timerange with hour/minute precision (in UTC)"
+        :title="$t('Select the timerange with hour/minute precision (in UTC)')"
       >
         {{ $t('Use time') }}
       </BaseCheckbox>

@@ -52,18 +52,18 @@ const autoRefreshLoc = computed({
           v-if="!noRefreshSwitch"
           v-model="autoRefreshLoc"
           class="mr-2"
-          :title="`Auto refresh for ${bot.botName || bot.botId}`"
+          :title="`${$t('Auto refresh')}: ${bot.botName || bot.botId}`"
         />
         <div
           v-if="selectedBotStore.isBotLoggedIn"
-          :title="selectedBotStore.isBotOnline ? 'Online' : 'Offline'"
+          :title="selectedBotStore.isBotOnline ? $t('Online') : $t('Offline')"
         >
           <i-mdi-circle
             class="mx-1"
             :class="selectedBotStore.isBotOnline ? 'text-green-500' : 'text-red-500'"
           />
         </div>
-        <div v-else title="Login info expired, please login again.">
+        <div v-else :title="$t('Login info expired, please login again.')">
           <i-mdi-cancel class="text-red-500 mx-1" />
         </div>
       </div>
@@ -73,7 +73,7 @@ const autoRefreshLoc = computed({
           v-if="!noButtons && selectedBotStore.isBotLoggedIn"
           color="neutral"
           variant="soft"
-          title="Edit bot"
+          :title="$t('Edit bot')"
           @click="$emit('edit', bot.botId)"
           icon="mdi:pencil"
         />
@@ -81,7 +81,7 @@ const autoRefreshLoc = computed({
           v-if="!noRefreshSwitch && !selectedBotStore.isBotLoggedIn"
           variant="soft"
           color="neutral"
-          title="Login again"
+          :title="$t('Login again')"
           @click="$emit('editLogin', bot.botId)"
           icon="mdi:login"
         />
@@ -89,7 +89,7 @@ const autoRefreshLoc = computed({
           v-if="!noButtons"
           variant="soft"
           color="neutral"
-          title="Delete bot"
+          :title="$t('Delete bot')"
           @click="removeBotQuestion"
           icon="mdi:delete"
         />

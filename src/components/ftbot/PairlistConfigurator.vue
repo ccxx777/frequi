@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import type { Pairlist } from '@/types';
 import { useSortable, moveArrayElement } from '@vueuse/integrations/useSortable';
+import { useI18n } from '@/composables/useI18n';
 
+const { t } = useI18n();
 const botStore = useBotStore();
 const pairlistStore = usePairlistConfigStore();
 
@@ -9,6 +11,11 @@ const availablePairlists = ref<Pairlist[]>([]);
 const pairlistConfigsEl = ref<HTMLElement | null>(null);
 const availablePairlistsEl = ref<HTMLElement | null>(null);
 const selectedView = ref<'Config' | 'Results'>('Config');
+
+const viewOptions = computed(() => [
+  { value: 'Config', label: t('Config') },
+  { value: 'Results', label: t('Results'), disabled: pairlistStore.whitelist.length === 0 },
+]);
 
 const configEmpty = computed(() => {
   return pairlistStore.config.pairlists.length == 0;
@@ -95,7 +102,7 @@ if (pairlistStore.whitelist.length > 0) {
       >
         <div class="flex grow items-start flex-col">
           <span class="font-bold">{{ pairlist.name }}</span>
-          <span class="text-sm text-muted">{{ pairlist.description }}</span>
+          <span class="text-sm text-muted">{{ $t(pairlist.description) }}</span>
         </div>
         <UButton
           color="neutral"
@@ -110,21 +117,21 @@ if (pairlistStore.whitelist.length > 0) {
       <PairlistConfigActions />
       <div class="border rounded-sm border-neutral-500 p-2 mb-2">
         <div class="flex items-center gap-2 my-2">
-          <span class="col-auto">Stake currency: </span>
+          <span class="col-auto">{{ $t('Stake currency:') }} </span>
           <UInput v-model="pairlistStore.stakeCurrency" />
         </div>
 
         <div class="mb-2 border rounded-sm border-neutral-500 p-2 text-start">
           <div class="flex gap-5">
             <BaseCheckbox v-model="pairlistStore.customExchange" class="mb-2">
-              Custom Exchange
+              {{ $t('Custom Exchange') }}
             </BaseCheckbox>
             <span
               v-show="!pairlistStore.customExchange"
               class="text-sm"
-              title="Current exchange from the configuration"
+              :title="$t('Current exchange from the configuration')"
             >
-              Current Exchange:
+              {{ $t('Current Exchange:') }}
               <span class="font-bold">
                 {{ botStore.activeBot.botState.exchange }}
                 {{ botStore.activeBot.botState.trading_mode }}
@@ -144,9 +151,8 @@ if (pairlistStore.whitelist.length > 0) {
         v-if="pairlistStore.config.pairlists.length > 0 && !pairlistStore.firstPairlistIsGenerator"
         class="my-2"
         color="warning"
-        title="Invalid configuration"
-        description="The first entry in the pairlist must be a Generating pairlist, like StaticPairList or
-          VolumePairList."
+        :title="$t('Invalid configuration')"
+        :description="$t('The first entry in the pairlist must be a Generating pairlist, like StaticPairList or VolumePairList.')"
       />
       <div
         ref="pairlistConfigsEl"
@@ -166,13 +172,10 @@ if (pairlistStore.whitelist.length > 0) {
       <USegmentedControl
         v-model="selectedView"
         class="mb-2"
-        label-key="value"
+        label-key="label"
         value-key="value"
         size="md"
-        :items="[
-          { value: 'Config' },
-          { value: 'Results', disabled: pairlistStore.whitelist.length === 0 },
-        ]"
+        :items="viewOptions"
         disabled-key="disabled"
       >
       </USegmentedControl>
@@ -195,7 +198,7 @@ if (pairlistStore.whitelist.length > 0) {
 
 <style lang="scss" scoped>
 .empty:after {
-  content: 'Drag pairlist here';
+  content: '拖拽交易对规则至此处 (Drag pairlist here)';
   position: absolute;
   align-self: center;
   font-size: 1.1rem;

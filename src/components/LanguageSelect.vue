@@ -13,7 +13,7 @@ function toggleLanguage() {
 <template>
   <UButton
     variant="link"
-    :title="currentLocale === 'zh-CN' ? '切换语言 (Switch to English)' : 'Switch Language (切换为中文)'"
+    :title="currentLocale === 'zh-CN' ? '当前：中文 (点击切换为 English)' : 'Current: English (Click to switch to Chinese)'"
     color="neutral"
     :label="showText ? (currentLocale === 'zh-CN' ? 'English' : '简体中文') : (currentLocale === 'zh-CN' ? '中' : 'EN')"
     @click="toggleLanguage"

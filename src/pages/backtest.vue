@@ -232,17 +232,17 @@ const resultSelectItems = computed(() =>
                 @click="showHistoryLoad = true"
               />
             </UTooltip>
-            <UTooltip text="Reset backtest">
+            <UTooltip :text="$t('Reset backtest')">
               <UButton
                 color="neutral"
                 variant="outline"
                 icon="i-mdi-delete"
-                aria-label="Reset backtest"
+                :aria-label="$t('Reset backtest')"
                 :disabled="botStore.activeBot.backtestRunning || !botStore.activeBot.canRunBacktest"
                 @click="resetBacktest"
               />
             </UTooltip>
-            <UTooltip v-if="botStore.activeBot.backtestRunning" text="Backtest running">
+            <UTooltip v-if="botStore.activeBot.backtestRunning" :text="$t('Backtest running')">
               <UIcon name="i-mdi-loading" class="animate-spin text-primary size-5 mx-auto" />
             </UTooltip>
           </div>
@@ -252,7 +252,8 @@ const resultSelectItems = computed(() =>
           color="neutral"
           variant="ghost"
           class="mt-auto self-start"
-          :aria-label="railCollapsed ? 'Expand result list' : 'Collapse result list'"
+          :aria-label="railCollapsed ? $t('Expand result list') : $t('Collapse result list')"
+          :title="railCollapsed ? $t('Expand result list') : $t('Collapse result list')"
           @click="railCollapsed = !railCollapsed"
         />
       </aside>
@@ -264,7 +265,7 @@ const resultSelectItems = computed(() =>
           color="warning"
           variant="subtle"
           icon="i-mdi-alert"
-          title="Bot must be in webserver mode to enable Backtesting."
+          :title="$t('Bot must be in webserver mode to enable Backtesting.')"
         />
         <!-- Mobile result selection -->
         <div class="flex md:hidden items-center gap-1">
@@ -278,7 +279,7 @@ const resultSelectItems = computed(() =>
           <UButton
             icon="i-mdi-plus"
             :disabled="!botStore.activeBot.canRunBacktest"
-            aria-label="New backtest"
+            :aria-label="$t('New backtest')"
             @click="view = 'new'"
           />
           <UButton
@@ -286,7 +287,7 @@ const resultSelectItems = computed(() =>
             icon="i-mdi-cloud-download"
             color="neutral"
             variant="outline"
-            aria-label="Load from disk"
+            :aria-label="$t('Load from disk')"
             :disabled="!botStore.activeBot.canRunBacktest"
             @click="showHistoryLoad = true"
           />
@@ -418,7 +419,7 @@ const resultSelectItems = computed(() =>
 
     <UModal
       v-model:open="showHistoryLoad"
-      title="Load results from disk"
+      :title="$t('Load results from disk')"
       :ui="{ content: 'sm:max-w-6xl' }"
     >
       <template #body>

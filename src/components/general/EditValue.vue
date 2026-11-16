@@ -81,34 +81,34 @@ function saveNewName() {
       <template v-if="allowEdit && mode === EditState.None">
         <UButton
           color="neutral"
-          :title="`Edit this ${editableName}.`"
+          :title="$t(`Edit this ${editableName}.`)"
           icon="mdi:pencil"
           @click="mode = EditState.Editing"
         />
         <UButton
           v-if="allowDuplicate"
           color="neutral"
-          :title="`Duplicate ${editableName}.`"
+          :title="$t(`Duplicate ${editableName}.`)"
           icon="mdi:content-copy"
           @click="duplicate"
         />
         <UButton
           color="neutral"
-          :title="`Delete this ${editableName}.`"
+          :title="$t(`Delete this ${editableName}.`)"
           icon="mdi:delete"
           @click="$emit('delete', modelValue)"
         />
       </template>
       <UButton
         v-if="allowAdd && mode === EditState.None"
-        :title="`Add new ${editableName}.`"
+        :title="$t(`Add new ${editableName}.`)"
         icon="mdi:plus-box-outline"
         variant="solid"
         @click="addNewClick"
       />
       <template v-if="mode !== EditState.None">
-        <UButton :title="`Add new ${editableName}`" icon="mdi:check" @click="saveNewName" />
-        <UButton title="Abort" color="neutral" icon="mdi:close" @click="abort" />
+        <UButton :title="$t('Save')" icon="mdi:check" @click="saveNewName" />
+        <UButton :title="$t('Cancel')" color="neutral" icon="mdi:close" @click="abort" />
       </template>
     </div>
   </form>

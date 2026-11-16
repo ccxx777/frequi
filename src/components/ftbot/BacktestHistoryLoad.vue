@@ -2,7 +2,9 @@
 import type { BacktestHistoryEntry } from '@/types';
 import type { TableColumn } from '@nuxt/ui';
 import type { TableMeta, Row } from '@tanstack/vue-table';
+import { useI18n } from '@/composables/useI18n';
 
+const { t } = useI18n();
 const botStore = useBotStore();
 const { confirm } = useConfirmBox();
 const filterText = ref('');
@@ -15,8 +17,8 @@ onMounted(() => {
 async function deleteBacktestResult(result: BacktestHistoryEntry) {
   if (
     await confirm({
-      title: 'Delete result',
-      message: `Delete result ${result.filename} from disk?`,
+      title: t('Delete result'),
+      message: `${t('Delete result')} ${result.filename}?`,
     })
   ) {
     botStore.activeBot.deleteBacktestHistoryResult(result);
@@ -30,13 +32,13 @@ const filteredList = computed(() =>
       r.strategy.toLowerCase().includes(filterTextDebounced.value.toLowerCase()),
   ),
 );
-const columns: TableColumn<BacktestHistoryEntry>[] = [
-  { accessorKey: 'strategy', header: 'Strategy' },
-  { accessorKey: 'timeframe', header: 'Details' },
-  { accessorKey: 'backtest_start_time', header: 'Backtest Time' },
-  { accessorKey: 'filename', header: 'Filename' },
-  { id: 'actions', header: 'Actions' },
-];
+const columns = computed<TableColumn<BacktestHistoryEntry>[]>(() => [
+  { accessorKey: 'strategy', header: t('Strategy') },
+  { accessorKey: 'timeframe', header: t('Details') },
+  { accessorKey: 'backtest_start_time', header: t('Backtest Time') },
+  { accessorKey: 'filename', header: t('Filename') },
+  { id: 'actions', header: t('Actions') },
+]);
 
 function isRowLoaded(row: Row<BacktestHistoryEntry>) {
   return row.original.run_id in botStore.activeBot.backtestHistory;
@@ -58,24 +60,23 @@ const meta: TableMeta<BacktestHistoryEntry> = {
   <div>
     <UButton
       class="float-end"
-      title="Refresh"
-      aria-label="Refresh"
+      :title="$t('Refresh')"
+      :aria-label="$t('Refresh')"
       variant="outline"
       color="neutral"
       icon="mdi:refresh"
       @click="botStore.activeBot.getBacktestHistory"
     />
     <p>
-      Load Historic results from disk. You can click on multiple results to load all of them into
-      freqUI.
+      {{ $t('Load Historic results from disk. You can click on multiple results to load all of them into freqUI.') }}
     </p>
     <div v-if="botStore.activeBot.backtestHistoryList.length > 0" class="flex align-center">
       <UInput
         id="trade-filter"
         v-model="filterText"
         type="text"
-        placeholder="Filter results"
-        title="Filter results"
+        :placeholder="$t('Filter results')"
+        :title="$t('Filter results')"
       />
     </div>
     <UTable

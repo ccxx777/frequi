@@ -126,27 +126,27 @@ watch(
 <template>
   <div class="flex h-full min-h-0 min-w-0 flex-col overflow-hidden">
     <div v-if="botStore.activeBot.isWebserverMode" class="md:mx-3 mt-2 px-1">
-      <BaseCollapsible size="md" open title="Chart Settings" :unmount-on-hide="false">
+      <BaseCollapsible size="md" open :title="$t('Chart Settings')" :unmount-on-hide="false">
         <template #title>
-          <span class="text-lg font-bold">Chart Settings</span>
+          <span class="text-lg font-bold">{{ $t('Chart Settings') }}</span>
           <InfoBox
-            hint="These settings only apply to the chart view and do not affect the bot's actual configuration or behavior."
+            :hint="$t(`These settings only apply to the chart view and do not affect the bot's actual configuration or behavior.`)"
           />
         </template>
         <div class="grid grid-cols-3 md:grid-cols-5 gap-2 m-2">
-          <UFormField label="Exchange" class="col-span-2">
+          <UFormField :label="$t('Exchange')" class="col-span-2">
             <div
               class="mb-2 border dark:border-neutral-700 border-neutral-300 rounded-md p-1 text-start col-span-2"
             >
               <UCollapsible v-model:open="exchange.customExchange">
                 <div class="flex flex-row gap-5 items-center">
-                  <BaseCheckbox v-model="exchange.customExchange">Custom Exchange</BaseCheckbox>
+                  <BaseCheckbox v-model="exchange.customExchange">{{ $t('Custom Exchange') }}</BaseCheckbox>
                   <span
                     v-show="!exchange.customExchange"
                     class="text-sm"
-                    title="Current exchange from the configuration"
+                    :title="$t('Current exchange from the configuration')"
                   >
-                    Current Exchange:
+                    {{ $t('Current Exchange:') }}
                     <span class="font-bold">
                       {{ botStore.activeBot.botState.exchange }}
                       {{ botStore.activeBot.botState.trading_mode }}
@@ -162,13 +162,13 @@ watch(
               v-if="botStore.activeBot.botFeatures.chartLiveData"
               v-model="chartStore.useLiveData"
               class="align-self-center"
-              title="Use live data from the exchange. Only use if you don't have data downloaded locally."
+              :title="$t('Use live data from the exchange. Only use if you don\\'t have data downloaded locally.')"
             >
-              Use Live Data
+              {{ $t('Use Live Data') }}
             </BaseCheckbox>
           </UFormField>
           <div class="flex flex-col text-start">
-            <UFormField label="Timeframe">
+            <UFormField :label="$t('Timeframe')">
               <TimeframeSelect v-model="chartStore.selectedTimeframe" class="w-full" />
             </UFormField>
           </div>
@@ -177,7 +177,7 @@ watch(
             :can-use-time="botStore.activeBot.botFeatures.timerangeWithTime"
             class="col-span-3 md:col-span-2"
           ></TimeRangeSelect>
-          <UFormField label="Strategy" class="col-span-3 md:col-span-2">
+          <UFormField :label="$t('Strategy')" class="col-span-3 md:col-span-2">
             <StrategySelect
               v-model="chartStore.strategy"
               v-model:details="selectedStrategyDetails"
@@ -189,7 +189,7 @@ watch(
             v-if="
               botStore.activeBot.botFeatures.strategyParametersModify && selectedStrategyDetails
             "
-            label="Strategy params"
+            :label="$t('Strategy params')"
             class="col-span-3 md:col-span-3"
           >
             <BaseCollapsible
@@ -198,12 +198,12 @@ watch(
               :unmount-on-hide="false"
             >
               <template #title>
-                Open to modify strategy parameters
-                <span v-if="strategyParamsModified" class="text-warning"> (modified) </span>
+                {{ $t('Open to modify strategy parameters') }}
+                <span v-if="strategyParamsModified" class="text-warning"> ({{ $t('modified') }}) </span>
               </template>
               <p class="flex items-center gap-1 mx-3 mt-2 text-sm text-muted">
                 <UIcon name="i-mdi-information-outline" />
-                Explicitly reload the chart after changing parameters.
+                {{ $t('Explicitly reload the chart after changing parameters.') }}
               </p>
               <StrategyParameters
                 :strategy="selectedStrategyDetails"
@@ -212,7 +212,7 @@ watch(
                 v-model:parameters="strategyParams"
               />
             </BaseCollapsible>
-            <span v-else class="text-md font-bold">No strategy parameters available</span>
+            <span v-else class="text-md font-bold">{{ $t('No strategy parameters available') }}</span>
           </UFormField>
         </div>
       </BaseCollapsible>

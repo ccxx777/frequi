@@ -20,9 +20,9 @@ const options = computed(() => {
 
 <template>
   <div class="pb-1 flex flex-row text-start">
-    <label class="w-2/5"> {{ param.description }}</label>
+    <label class="w-2/5"> {{ $t(param.description) }}</label>
     <div class="flex flex-col w-full">
-      <UFormField :help="param.help">
+      <UFormField :help="$t(param.help)">
         <UInput
           v-if="param.type === PairlistParamType.string || param.type === PairlistParamType.number"
           v-model="paramValue"

@@ -36,7 +36,7 @@ function toggleVisible() {
           @click="toggleVisible"
         >
           <span class="font-bold">{{ pairlist.name }}</span>
-          <span class="text-sm">{{ pairlist.description }}</span>
+          <span class="text-sm">{{ $t(pairlist.description) }}</span>
         </div>
       </div>
       <i-mdi-close
