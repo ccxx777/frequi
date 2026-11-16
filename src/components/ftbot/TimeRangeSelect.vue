@@ -120,13 +120,13 @@ onMounted(() => {
   <div>
     <div class="flex gap-2">
       <div class="flex flex-1 min-w-0 gap-1">
-        <UFormField label="Start Date" class="flex-1 min-w-0">
+        <UFormField :label="$t('Start Date')" class="flex-1 min-w-0">
           <UInputDate
             v-model="dateFrom"
             :locale="dateLocale"
             :max-value="maxDateNow"
             :ui="{ base: 'pe-14' }"
-            title="Start date (yyyy-mm-dd, UTC)"
+            :title="$t('Start date (yyyy-mm-dd, UTC)')"
           >
             <template #trailing>
               <UButton
@@ -173,13 +173,13 @@ onMounted(() => {
         </UFormField>
       </div>
       <div class="flex flex-1 min-w-0 gap-1">
-        <UFormField label="End Date" class="flex-1 min-w-0">
+        <UFormField :label="$t('End Date')" class="flex-1 min-w-0">
           <UInputDate
             v-model="dateTo"
             :locale="dateLocale"
             :max-value="maxDateTomorrow"
             :ui="{ base: 'pe-14' }"
-            title="End date (yyyy-mm-dd, UTC)"
+            :title="$t('End date (yyyy-mm-dd, UTC)')"
           >
             <template #trailing>
               <UButton
@@ -232,10 +232,10 @@ onMounted(() => {
         v-model="withTime"
         title="Select the timerange with hour/minute precision (in UTC)"
       >
-        Use time
+        {{ $t('Use time') }}
       </BaseCheckbox>
       <div class="text-start">
-        Timerange: <b>{{ timeRange }}</b>
+        {{ $t('Timerange:') }} <b>{{ timeRange }}</b>
       </div>
     </div>
   </div>

@@ -158,7 +158,7 @@ const resultSelectItems = computed(() =>
               :disabled="!botStore.activeBot.canRunBacktest"
               @click="view = 'new'"
             >
-              New backtest
+              {{ $t('New backtest') }}
             </UButton>
             <div class="flex gap-1">
               <UButton
@@ -171,14 +171,14 @@ const resultSelectItems = computed(() =>
                 :disabled="!botStore.activeBot.canRunBacktest"
                 @click="showHistoryLoad = true"
               >
-                Load from disk
+                {{ $t('Load from disk') }}
               </UButton>
-              <UTooltip text="Reset backtest">
+              <UTooltip :text="$t('Reset backtest')">
                 <UButton
                   color="neutral"
                   variant="outline"
                   icon="i-mdi-replay"
-                  aria-label="Reset backtest"
+                  :aria-label="$t('Reset backtest')"
                   :disabled="
                     botStore.activeBot.backtestRunning || !botStore.activeBot.canRunBacktest
                   "
@@ -187,7 +187,7 @@ const resultSelectItems = computed(() =>
               </UTooltip>
             </div>
             <BacktestRunningStatus />
-            <USeparator label="Results" />
+            <USeparator :label="$t('Results')" />
             <div class="grow min-h-0 overflow-y-auto">
               <BacktestResultSelect
                 v-model:compare-keys="compareKeys"
@@ -199,7 +199,7 @@ const resultSelectItems = computed(() =>
                 @update-result="botStore.activeBot.saveBacktestResultMetadata"
               />
               <p v-if="!hasBacktestResult" class="text-sm text-muted text-center p-2">
-                No results loaded yet.
+                {{ $t('No results loaded yet') }}
               </p>
             </div>
             <UButton
@@ -211,7 +211,7 @@ const resultSelectItems = computed(() =>
               :title="canCompare ? '' : 'Tick at least 2 results to compare them'"
               @click="view = 'compare'"
             >
-              Compare ({{ Object.keys(compareResults).length }})
+              {{ $t('Compare') }} ({{ Object.keys(compareResults).length }})
             </UButton>
           </div>
           <div v-else class="flex flex-col gap-1 grow min-h-0">
@@ -302,7 +302,7 @@ const resultSelectItems = computed(() =>
         <BacktestRunningStatus class="md:hidden" />
 
         <template v-if="view === 'new'">
-          <h3 class="text-xl font-bold">New backtest</h3>
+          <h3 class="text-xl font-bold">{{ $t('New backtest') }}</h3>
           <BacktestRun :can-cancel="hasBacktestResult" @cancel="view = 'result'" />
         </template>
 

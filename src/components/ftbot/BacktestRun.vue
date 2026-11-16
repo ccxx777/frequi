@@ -81,14 +81,14 @@ const strategyParamsModified = computed(() =>
         <UCard class="order-1" :ui="{ header: 'py-2 sm:px-4', body: 'flex flex-col gap-3 sm:p-4' }">
           <template #header>
             <h4 class="font-bold flex items-center gap-2">
-              <UIcon name="i-mdi-strategy" />Strategy
+              <UIcon name="i-mdi-strategy" />{{ $t('Strategy') }}
             </h4>
           </template>
-          <UFormField label="Strategy">
+          <UFormField :label="$t('Strategy')">
             <StrategySelect v-model="btStore.strategy" v-model:details="selectedStrategyDetails" />
           </UFormField>
           <div class="grid grid-cols-2 gap-2">
-            <UFormField label="Timeframe">
+            <UFormField :label="$t('Timeframe')">
               <TimeframeSelect
                 id="timeframe-select"
                 v-model="btStore.selectedTimeframe"
@@ -96,8 +96,8 @@ const strategyParamsModified = computed(() =>
               />
             </UFormField>
             <UFormField
-              label="Detail timeframe"
-              help="Simulates intra-candle results. Leave empty to disable."
+              :label="$t('Detail timeframe')"
+              :help="$t('Simulates intra-candle results. Leave empty to disable.')"
             >
               <TimeframeSelect
                 id="timeframe-detail-select"
@@ -109,7 +109,7 @@ const strategyParamsModified = computed(() =>
           </div>
           <UFormField
             v-if="botStore.activeBot.botFeatures.strategyParametersModify"
-            label="Strategy parameters"
+            :label="$t('Strategy parameters')"
           >
             <BaseCollapsible
               v-if="selectedStrategyDetails && selectedStrategyDetails?.params.length > 0"
@@ -117,9 +117,9 @@ const strategyParamsModified = computed(() =>
               :unmount-on-hide="false"
             >
               <template #title>
-                Open to modify strategy parameters
+                {{ $t('Open to modify strategy parameters') }}
                 <UBadge v-if="strategyParamsModified" color="warning" variant="subtle" size="sm">
-                  modified
+                  {{ $t('modified') }}
                 </UBadge>
               </template>
               <StrategyParameters
@@ -130,26 +130,26 @@ const strategyParamsModified = computed(() =>
                 v-model:parameters="strategyParams"
               />
             </BaseCollapsible>
-            <span v-else class="text-muted text-sm">No strategy parameters available</span>
+            <span v-else class="text-muted text-sm">{{ $t('No strategy parameters available') }}</span>
           </UFormField>
         </UCard>
 
         <UCard class="order-4" :ui="{ header: 'py-2 sm:px-4', body: 'flex flex-col gap-3 sm:p-4' }">
           <template #header>
-            <h4 class="font-bold flex items-center gap-2"><UIcon name="i-mdi-cog" />Advanced</h4>
+            <h4 class="font-bold flex items-center gap-2"><UIcon name="i-mdi-cog" />{{ $t('Advanced') }}</h4>
           </template>
           <USwitch
             id="enable-protections"
             v-model="btStore.enableProtections"
-            label="Enable protections"
-            description="Apply the strategy's protections during the backtest."
+            :label="$t('Enable protections')"
+            :description="$t('Apply the strategy\'s protections during the backtest.')"
           />
           <template v-if="botStore.activeBot.botFeatures.backtestFreqAI">
             <USwitch
               id="enable-cache"
               v-model="btStore.allowCache"
-              label="Cache backtest results"
-              description="Reuse previous results when strategy and settings are unchanged."
+              :label="$t('Cache backtest results')"
+              :description="$t('Reuse previous results when strategy and settings are unchanged.')"
             />
             <FreqAIModelInput v-model="btStore.freqAI" />
           </template>
@@ -160,7 +160,7 @@ const strategyParamsModified = computed(() =>
         <UCard class="order-2" :ui="{ header: 'py-2 sm:px-4', body: 'sm:p-4' }">
           <template #header>
             <h4 class="font-bold flex items-center gap-2">
-              <UIcon name="i-mdi-calendar-range" />Time range
+              <UIcon name="i-mdi-calendar-range" />{{ $t('Time range') }}
             </h4>
           </template>
           <TimeRangeSelect
@@ -171,13 +171,13 @@ const strategyParamsModified = computed(() =>
 
         <UCard class="order-3" :ui="{ header: 'py-2 sm:px-4', body: 'flex flex-col gap-3 sm:p-4' }">
           <template #header>
-            <h4 class="font-bold flex items-center gap-2"><UIcon name="i-mdi-wallet" />Wallet</h4>
+            <h4 class="font-bold flex items-center gap-2"><UIcon name="i-mdi-wallet" />{{ $t('Wallet') }}</h4>
           </template>
-          <UFormField label="Starting capital">
+          <UFormField :label="$t('Starting capital')">
             <UInputNumber
               id="starting-capital"
               v-model="btStore.startingCapital"
-              placeholder="Use config default"
+              :placeholder="$t('Use config default')"
               :increment="false"
               :decrement="false"
               :step="10"
@@ -188,21 +188,21 @@ const strategyParamsModified = computed(() =>
               }"
             />
           </UFormField>
-          <UFormField label="Max open trades">
+          <UFormField :label="$t('Max open trades')">
             <UInputNumber
               id="max-open-trades"
               v-model="btStore.maxOpenTrades"
-              placeholder="Use strategy default"
+              :placeholder="$t('Use strategy default')"
               :increment="false"
               :decrement="false"
             />
           </UFormField>
-          <UFormField label="Stake amount">
+          <UFormField :label="$t('Stake amount')">
             <div class="flex items-center gap-3">
               <UInputNumber
                 id="stake-amount"
                 v-model="btStore.stakeAmount"
-                placeholder="Use strategy default"
+                :placeholder="$t('Use strategy default')"
                 class="grow"
                 :step="10"
                 :stepSnapping="false"
@@ -217,7 +217,7 @@ const strategyParamsModified = computed(() =>
               <UCheckbox
                 id="stake-amount-bool"
                 v-model="btStore.stakeAmountUnlimited"
-                label="Unlimited"
+                :label="$t('Unlimited')"
               />
             </div>
           </UFormField>
@@ -233,7 +233,7 @@ const strategyParamsModified = computed(() =>
         variant="outline"
         @click="$emit('cancel')"
       >
-        Back to results
+        {{ $t('Back to results') }}
       </UButton>
       <UButton
         id="start-backtest"
@@ -247,7 +247,7 @@ const strategyParamsModified = computed(() =>
         "
         @click="clickBacktest"
       >
-        Start backtest
+        {{ $t('Start backtest') }}
       </UButton>
     </div>
   </div>
