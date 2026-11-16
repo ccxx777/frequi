@@ -162,7 +162,7 @@ watch(
               v-if="botStore.activeBot.botFeatures.chartLiveData"
               v-model="chartStore.useLiveData"
               class="align-self-center"
-              :title="$t('Use live data from the exchange. Only use if you don\\'t have data downloaded locally.')"
+              :title="$t(`Use live data from the exchange. Only use if you don't have data downloaded locally.`)"
             >
               {{ $t('Use Live Data') }}
             </BaseCheckbox>
