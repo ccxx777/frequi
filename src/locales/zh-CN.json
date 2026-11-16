@@ -392,5 +392,19 @@
   "Calmar": "卡玛比率 (Calmar)",
   "Cagr": "年化复合增长率 (CAGR)",
   "SQN": "系统品质指数 (SQN)",
-  "Mean profit p-value": "平均收益 p值"
+  "Mean profit p-value": "平均收益 p值",
+  "Reset": "重置",
+  "Reset to last saved configuration": "重置为上次保存的配置",
+  "Delete this value.": "删除此项",
+  "Add new value": "添加新项",
+  "Add new value.": "添加新项",
+  "Edit this value.": "编辑此项",
+  "Duplicate value.": "复制此项",
+  "Reset space": "重置当前空间",
+  "Reset all": "全部重置",
+  "Reset parameter to default value": "重置参数为默认值",
+  "Reset all parameters to their default values": "重置所有参数为默认值",
+  "Reset parameters of this space to their default values": "重置该空间参数为默认值",
+  "This strategy has no parameters.": "此策略没有可调参数。",
+  "Freqtrade bot Login": "登录交易机器人"
 }

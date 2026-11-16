@@ -157,8 +157,8 @@ function resetParameter(param: AllStrategyParameter): void {
           class="mb-1"
           @click="resetSpaceParameters(space)"
           icon="mdi:restore"
-          title="Reset parameters of this space to their default values"
-          label="Reset space"
+          :title="$t('Reset parameters of this space to their default values')"
+          :label="$t('Reset space')"
         />
       </div>
       <div
@@ -206,7 +206,7 @@ function resetParameter(param: AllStrategyParameter): void {
             size="md"
             @click="resetParameter(param)"
             icon="mdi:restore"
-            title="Reset parameter to default value"
+            :title="$t('Reset parameter to default value')"
           />
         </template>
       </div>
@@ -216,12 +216,12 @@ function resetParameter(param: AllStrategyParameter): void {
         variant="outline"
         @click="resetParameters"
         icon="mdi:restore"
-        title="Reset all parameters to their default values"
-        label="Reset all"
+        :title="$t('Reset all parameters to their default values')"
+        :label="$t('Reset all')"
       />
     </div>
   </div>
   <div v-else class="p-4">
-    <p>This strategy has no parameters.</p>
+    <p>{{ $t('This strategy has no parameters.') }}</p>
   </div>
 </template>
